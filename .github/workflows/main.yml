@@ -8,6 +8,15 @@ jobs:
     container: ros:melodic
     steps:
       - run: |
-          docker build -t dtusdc .
-          docker run -it dtusdc
+          apt-get update --fix-missing \
+          && apt-get -y install git python-pip \
+          && apt-get clean \
+          && sudo pip install -U catkin_tools
+          
+          cd ~/
+          
+          git clone https://github.com/dtusdc/ros.git src
+          
+          rosdep install --from-paths src --ignore-src -r -y
+  
           catkin build
