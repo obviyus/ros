@@ -7,24 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     container: ros:melodic
     steps:
-      - uses: actions/checkout@v1
       - name: Update apt-get
       - run: |
           apt-get update --fix-missing \
           && apt-get -y install git python-pip \
           && apt-get clean \
-      
-      - name: Install catkin tools
-      - run: |
+
           sudo pip install -U catkin_tools
-      
-      - name: Clone repo and install dependencies
-      - run: |    
+ 
           cd ~/
           git clone https://github.com/dtusdc/ros.git src
           rosdep update
           rosdep install --from-paths src --ignore-src -r -y
-      
-      - name: build
-      - run: |
+
           catkin build
