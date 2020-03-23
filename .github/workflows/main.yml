@@ -9,8 +9,8 @@ jobs:
     steps:
       - run: |
           apt-get update --fix-missing 
-          && apt-get -y install git python-pip 
-          && apt-get clean 
+          apt-get -y install git python-pip 
+          apt-get clean 
 
           sudo pip install -U catkin_tools
  
